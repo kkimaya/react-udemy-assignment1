@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
-import UserOutput from './UserOutput/UserOutput';
-import UserInput from './UserInput/UserInput';
+import ValidationComponent from './ValidationComponent'
+import CharacterComponent from './CharComponent'
 class App extends Component {
 
   state={
-    useroutput:[
-        {username:'Kimu'},
-        {username:'Ijji'},
-        {username:'Boo'}
-    ]
+    userInput:''
   };
 
-  switchUsernameHandler = newName =>{
+  /*switchUsernameHandler = newName =>{
     this.setState({
     useroutput:[
         {username:newName},
@@ -32,19 +28,38 @@ class App extends Component {
         ]
       });
 
-  };
+  };*/
 
+
+  lengthCalculator = event => {
+     this.setState({
+
+        userInput:event.target.value
+     });
+  };
   render() {
 
     const style={
         border: '2px solid red'
     }
+
+    let characters=null;
+    const string=this.state.userInput;
+    const map = Array.prototype.map;
+    characters=map.call((string1,index) => {
+            return <CharacterComponent>${index}</CharacterComponent>
+    });
+
+
+
+
+
     return (
       <div className="App" style={style}>
-        <UserOutput click={this.switchUsernameHandler.bind(this, 'Kimaya')} username ={this.state.useroutput[0].username}/>
-        <UserOutput username= {this.state.useroutput[2].username}/>
-        <UserOutput username={this.state.useroutput[1].username}/>
-        <UserInput changed={this.nameChangedHandler}  username={this.state.useroutput[0].username}/>
+        <input type="text" onChange={this.lengthCalculator} value={this.state.userInput} />
+        <p>{this.state.userInput.length}</p>
+        <ValidationComponent changed={this.state.userInput.length}/>
+        {characters}
       </div>
     );
   }

@@ -7,30 +7,6 @@ class App extends Component {
   state={
     userInput:''
   };
-
-  /*switchUsernameHandler = newName =>{
-    this.setState({
-    useroutput:[
-        {username:newName},
-        {username:'Ijji'},
-        {username:'Boo'}
-    ]
-  });
-
-  };
-
-  nameChangedHandler = event =>{
-    this.setState({
-        useroutput:[
-            {username: event.target.value},
-            {username: 'Ijji'},
-            {username:'Boo'}
-        ]
-      });
-
-  };*/
-
-
   lengthCalculator = event => {
      this.setState({
 

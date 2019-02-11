@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import ValidationComponent from './ValidationComponent'
-import CharacterComponent from './CharComponent'
+import ValidationComponent from './ValidationComponent';
+import CharacterComponent from './CharComponent';
 class App extends Component {
 
   state={
@@ -9,9 +9,17 @@ class App extends Component {
   };
   lengthCalculator = event => {
      this.setState({
-
         userInput:event.target.value
      });
+  };
+
+  deleteOnClickHandler = (index) => {
+        const letters=this.state.userInput.split('');
+        letters.splice(index,1);
+        const updatedText= letters.join('');
+        this.setState({
+            userInput: updatedText
+        });
   };
   render() {
 
@@ -20,14 +28,9 @@ class App extends Component {
     }
 
     let characters=null;
-    const string=this.state.userInput;
-    const map = Array.prototype.map;
-    characters=map.call((string1,index) => {
-            return <CharacterComponent>${index}</CharacterComponent>
-    });
-
-
-
+    characters= (this.state.userInput.split('').map((char, index) => {
+            return <CharacterComponent character={char} clicked={()=> this.deleteOnClickHandler(index)}/>
+    }));
 
 
     return (
